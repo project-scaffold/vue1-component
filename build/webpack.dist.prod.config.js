@@ -1,5 +1,8 @@
 var path = require('path');
 var webpack = require('webpack');
+const pkg = require('../package')
+const camel = require('./camel')
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
     entry: {
@@ -8,10 +11,11 @@ module.exports = {
     output: {
         path: path.resolve(__dirname, '../dist'),
         publicPath: '/dist/',
-        filename: 'stage.min.js',
-        library: 'stage',
+        filename: `${pkg.name}.min.js`,
+        library: `${camel(pkg.name)}`,
         libraryTarget: 'umd',
         umdNamedDefine: true
+
     },
     externals: {
         vue: {
@@ -38,7 +42,8 @@ module.exports = {
         }, {
             test: /\.less$/,
             loader: 'style!css!less'
-        }, {
+        },
+          {
             test: /\.(gif|jpg|png|woff|svg|eot|ttf)\??.*$/,
             loader: 'url?limit=8192'
         }, {
@@ -46,8 +51,30 @@ module.exports = {
             loader: 'vue-html'
         }]
     },
+    vue: {
+      loaders: {
+        css: ExtractTextPlugin.extract(
+          'style-loader',
+          'css-loader?sourceMap',
+          {
+            publicPath: '/css'
+          }
+        ),
+        less: ExtractTextPlugin.extract(
+          'vue-style-loader',
+          'css-loader!less-loader',
+          {
+            publicPath: '/css'
+          }
+        ),
+        js: 'babel'
+      }
+    },
+  
     plugins: [
-        new webpack.DefinePlugin({
+      new ExtractTextPlugin('css/[name].css', {allChunks: true, resolve: ['modules']}),             // 提取CSS
+
+      new webpack.DefinePlugin({
             'process.env': {
                 NODE_ENV: '"production"'
             }

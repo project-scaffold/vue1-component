@@ -5,7 +5,8 @@
 var path = require('path');
 var webpack = require('webpack');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
-
+const pkg = require('../package')
+const camel = require('./camel')
 module.exports = {
   // 入口
   entry: {
@@ -55,7 +56,7 @@ module.exports = {
     // require时省略的扩展名，如：require('module') 不需要module.js
     extensions: ['', '.js', '.vue'],
     alias: {
-      stage: '../../src/index'
+      [camel(pkg.name)]: '../../src/index'
     }
   },
   plugins: [

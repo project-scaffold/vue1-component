@@ -6,6 +6,8 @@ var path = require('path');
 var webpack = require('webpack');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
+const pkg = require('../package')
+const camel = require('./camel')
 
 module.exports = {
 		// 入口
@@ -56,11 +58,11 @@ module.exports = {
 				// require时省略的扩展名，如：require('module') 不需要module.js
 				extensions: ['', '.js', '.vue'],
 				alias: {
-						minder: '../../src/index'
+						[camel(pkg.name)]: '../../src/index'
 				}
 		},
 		plugins: [
-				new ExtractTextPlugin('css/[name].css', {allChunks: true, resolve: ['modules']}),             // 提取CSS
+				new ExtractTextPlugin('styles/[name].css', {allChunks: true, resolve: ['modules']}),             // 提取CSS
 				new webpack.optimize.CommonsChunkPlugin('vendors', 'vendors.js'),
 				new webpack.DefinePlugin({
 						'process.env': {
