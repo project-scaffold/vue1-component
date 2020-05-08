@@ -1,1 +1,1 @@
-### vue1.0 dev template
+### {{ title }}

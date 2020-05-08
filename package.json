@@ -1,16 +1,16 @@
 {
-  "name": "vue-stage-view",
-  "version": "0.0.5",
-  "title": "Vue Stage View",
-  "description": "Vue Kityminder",
-  "homepage": "https://github.com/hexyun/vue-stage-view",
+  "name": "{{ name }}", 
+  "version": "0.0.1",
+  "title": "{{ name }}",
+  "description": "{{ description }}",
+  "homepage": "https://github.com/{{ git }}",
   "keywords": [
     "stage-view",
     "stage",
     "image viewer",
     "viewer"
   ],
-  "main": "dist/stage.min.js",
+  "main": "dist/{{name}}.min.js",
   "files": [
     "dist",
     "src"
@@ -32,16 +32,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/hexyun/vue-stage"
+    "url": "https://github.com/{{git}}"
   },
   "author": "jiangtao",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/vue-minder/issues"
+    "url": "https://github.com/{{ git }}/issues"
   },
   "dependencies": {
     "core-js": "^2.4.1",
-    "hexdo": "0.0.3",
     "vue": "1.0.28"
   },
   "devDependencies": {
